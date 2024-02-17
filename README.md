@@ -20,7 +20,7 @@ See the folder structure below:
 │   ├──LaTeXFinalPaperFiles
 │   │   └──Images
 │   └──Sample
-│   │   └──Images
+│       └──Images
 │
 ├──ProjectUpdates
 │   ├──Images
