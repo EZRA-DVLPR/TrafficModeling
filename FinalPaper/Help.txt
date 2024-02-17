@@ -1,0 +1,61 @@
+Help!
+**************************************************************************************************************
+General Tips:
+
+- You can download LaTeX from here: https://www.latex-project.org/get/
+
+- I use my Laptop with MacOS so I also utilize this program to compile and sometimes write in LaTeX.
+It's called TeXShop: https://pages.uoregon.edu/koch/texshop/.
+IDK if it's Windows compatible, but as long as you can compile the LaTeX docs, then it doesn't really matter.
+
+- Compile 3-5 times every time you want to see the changes to the document.
+LaTeX is VERY very weird in the sense that you have to compile multiple times.
+This is because each compilation utilizes information that is gained from the previous compilation.
+If images or graphs or tables, etc. dont show, then re-compiling should fix it.
+This is normal and expected behavior.
+
+- Only compile the main .tex file: that being the `finalPaper.tex`
+This reduces the amount of auxiliary files created by LaTeX during compilation.
+
+- I've attached a document in the `Sample` Folder, complete with Images, and auxiliary files.
+The main file is `Sample.tex`
+This is to be used as an outline to rip code from so you don't have to always be looking things up on the interwebs.
+It does a lot of different things, like make tables, add images, import other files, and more.
+Feel free to rip whatever you want from it, that doc has been used from me and others for at least 3 years now.
+In fact, sometimes I add to it, so if you find anything interesting or cool you want to add feel free to add to it!
+
+- Work on individual files then import them into the main `finalPaper.tex` file.
+This helps reduce the amount of conflicts we may encounter.
+
+- To use a citation type: `\cite[NAMEGIVEN]`
+The `NAMEGIVEN` should match EXACTLY to the name in the `bibitem{NAMEGIVEN}` within the bibliography
+
+- Comments can be written with the `%` character at the beginning of the line.
+Multi-line comments can be written in a few ways:
+    1) using the default packages:
+        \iffalse
+            Comment line 1
+            Comment line 2
+        \fi
+
+    2) using the verbatim package, you can write:
+        \begin{comment}
+            Commented line 1
+            Commented line 2
+        \end{comment}
+
+- We will need to combine the work from the weekly updates to the final document.
+We will most likely do that at the end, since it will basically just frontload the doc with padding.
+
+- Save images within the `Images` folder.
+We will use this folder for all images needed for the final paper.
+Each progress update also will use the image folder within that folder.
+**************************************************************************************************************
+
+Some guides:
+
+1) https://typeset.io/resources/learn-latex-beginners-step-by-step-guide/
+2) https://www.overleaf.com/learn/latex/Tutorials#Overleaf_LaTeX_tutorials
+3) https://latex-tutorial.com/
+4) https://www.youtube.com/watch?v=oSigbWpcoI8
+5) https://www.youtube.com/watch?v=VhmkLrOjLsw

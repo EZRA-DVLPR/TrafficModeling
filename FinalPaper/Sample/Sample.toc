@@ -1,0 +1,14 @@
+\babel@toc {english}{}
+\contentsline {section}{\numberline {1}Introduction}{2}%
+\contentsline {section}{\numberline {2}Methods}{2}%
+\contentsline {subsection}{\numberline {2.1}Example of subsection}{2}%
+\contentsline {subsubsection}{\numberline {2.1.1}Example of subsubsection}{2}%
+\contentsline {subsection}{\numberline {2.2}Example of mathematical formulas}{2}%
+\contentsline {subsection}{\numberline {2.3}Example of verbatim text}{3}%
+\contentsline {paragraph}{Note:}{4}%
+\contentsline {section}{\numberline {3}Imported Section}{4}%
+\contentsline {subsection}{\numberline {3.1}Lists}{4}%
+\contentsline {section}{\numberline {4}Results}{4}%
+\contentsline {section}{\numberline {5}Tables and figures}{5}%
+\contentsline {section}{\numberline {6}Discussion}{5}%
+\contentsline {section}{\numberline {7}Conclusions}{6}%
