@@ -1,3 +1,37 @@
 \section{Progress}
 
-Where are we with design/implementation?
+Where are we with design/implementation? We have made a simple Unity project so far where it is a camera pointing at a plane that has a texture of a screenshot from Google Maps attached to it. We intend to use this plane as a reference for whatever location we use in the program, the project so far being seen here:
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=10cm]{../Images/ProjectProgress1.png}
+       \caption{Screenshot of current Unity project with Game Panel on left.}
+           \label{Fig:UnityProject1}
+  \end{figure}
+
+\begin{flushleft}
+We also decided on a plan for how to structure our architecture for the project moving forward. As seen with the diagram below, we decided on 3 levels of computation/algorithms that will happen behind the UI scene where the project will ask the User for a location, feed that input into a script that will connect it to a webpage that will make the map then feed it back to that script that will return the image to the Unity project that we then run the traffic model on that map. 
+\end{flushleft}
+
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=10cm]{../Images/ArchitectureDiagram.jpg}
+       \caption{Sample Architecture Diagram outlined in Class 2/19/24.}
+           \label{Fig:ArchitectureDiagram}
+  \end{figure}
+
+
+\begin{flushleft}
+Since the traffic data that we had found wasn't very consistent (one intersection would have more updated data from 2015 when the other intersection nearby only had data from 1983) we are currently working towards grabbing a fixed amount of data for one location rather than letting the User input any random longitude and latitude for the program to run with. Instead, we are thinking of presenting the user with 3 or 4 options to choose from which is our fixed set of data to run. \par
+
+Additionally, Isaiah has set up a GitHub page for writing both our reports as well as adding any implementations and ML models for the project.
+\end{flushleft}
+
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=10cm]{../Images/GitPage.png}
+       \caption{Screenshot of the Git Page.}
+           \label{Fig:GitPage}
+  \end{figure}
