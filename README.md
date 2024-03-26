@@ -9,26 +9,44 @@ We will be utilizing LaTeX to write the documentation for this project.
 ## Tech Stack
 
 Unity
-...
+Python
+Blender
+[TomTom API](https://developer.tomtom.com/)
+
+>[!IMPORTANT]
+> To access python venv in windows use: ```./API/Scripts/activate``` from the root folder
+
+### API choices for TOMTOM
+
+- version number 4 selected for accurate data
+- relative speed selected (to show relevant speed according to the area)
+- png format selected for images
+- 
 
 # Folder Structure
 
 See the folder structure below:
 ```
 .
-├──FinalPaper
-│   ├──LaTeXFinalPaperFiles
-│   │   └──Images
-│   └──Sample
-│       └──Images
+├── API
 │
-├──ProjectUpdates
-│   ├──Images
-│   ├──Update1
-│   ├──Update2
-│   └──Update3
+├── BlenderModels
 │
-├──RelatedWorks
+├── FinalPaper
+│   ├── LaTeXFinalPaperFiles
+│   │   └── Images
+│   └── Sample
+│       └── Images
 │
-└──Readme.md
+├── ProjectUpdates
+│   ├── Images
+│   ├── Update1
+│   ├── Update2
+│   └── Update3
+│
+├── RelatedWorks
+│
+├── unity
+│
+└── Readme.md
 ```
