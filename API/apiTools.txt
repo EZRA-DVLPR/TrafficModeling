@@ -3,3 +3,6 @@ https://developer.tomtom.com/traffic-api/documentation/traffic-flow/traffic-flow
 
 raster flow tiles - with map
 https://developer.tomtom.com/traffic-api/documentation/traffic-flow/raster-flow-tiles
+
+#explanation for zoom levels and tile grid
+https://developer.tomtom.com/map-display-api/documentation/zoom-levels-and-tile-grid

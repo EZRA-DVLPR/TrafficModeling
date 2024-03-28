@@ -18,7 +18,7 @@ Blender
 
 ### API choices for TOMTOM
 
-- version number 4 selected for accurate data
+- version number 4 selected for accurate data (current version used by TomTom) [See Here:](https://developer.tomtom.com/traffic-api/documentation/traffic-flow/raster-flow-tiles)
 - relative speed selected (to show relevant speed according to the area)
 - png format selected for images
 - 
