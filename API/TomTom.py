@@ -161,3 +161,13 @@ extract_IMG(mod_URL)
 
 #See here for google maps vision of this map:
 #https://www.google.com/maps/d/u/0/viewer?mid=1JrNQOeGSrrvpQrYhLYgJfeCt7so&hl=en&ll=34.060222254822%2C-118.35919115297678&z=11
+
+################################################################################################################
+# Test 5:
+#            get hillshade & satellite images so we can look at 3D data on top of traffic data. we will use the same location from Test 4
+
+# hillshade
+# see: https://developer.tomtom.com/map-display-api/documentation/raster/hillshade-tile
+
+# satellite
+# see: https://developer.tomtom.com/map-display-api/documentation/raster/satellite-tile
