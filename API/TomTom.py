@@ -1,4 +1,4 @@
-import requests, os, math                 #web requests and accessing env vars and math for calc        -- reduce os to single function to save space 
+import requests, os, math, argparse #web requests and accessing env vars and math for calc        -- reduce os to single function to save space 
 from PIL import Image               #PIL is Pillow - image handling library for python
 from io import BytesIO              #io.BytesIO used for image bytecode handling
 from string import Template         #Template is used for editing the editable URL env var
@@ -15,17 +15,20 @@ def extract_IMG (html):
         image = image.convert("RGB")
         image.show()
     else:
-        print(res.status_code)
+        raise ValueError(f"Improper connection to TomTom. See code: {res.status_code}")
 
     return
 
 #defines bounds for conversions
-def boundChecker (latitude, longitude, zoom, style):
+def boundChecker (latitude, longitude, zoom, style, verbose):
+    if verbose:
+        print("Checking bounds...\n")
+
     if (latitude < -85.051128779807) or (latitude > 85.051128779806):
-        raise ValueError("Improper Latitude given. 0 < Latitude < 22")
+        raise ValueError("Improper Latitude given. -85.051128779807 < Latitude < 85.051128779806")
     
     if (longitude < -180) or (longitude > 180):
-        raise ValueError("Improper Longitude given. 0 < Longitude < 22")
+        raise ValueError("Improper Longitude given. -180 < Longitude < 180")
     
     #maximum zoom changes based off of map style:
     #See: (https://developer.tomtom.com/map-display-api/documentation/zoom-levels-and-tile-grid)
@@ -48,10 +51,16 @@ def boundChecker (latitude, longitude, zoom, style):
         if (zoom < 0) or (zoom > zoomMax):
             raise ValueError(f"Improper Zoom Level given. 0 < Zoom Level < {zoomMax}")
 
+    if verbose:
+        print("Bounds are Valid\n")
+
     return True
 
 #typecheks latitude, longitude, zoom, and style
-def typeChecker (latitude, longitude, zoom, style):
+def typeChecker (latitude, longitude, zoom, style, verbose):
+    if verbose:
+        print("Checking Types of Inputs...\n")
+
     #assert types of inputs: float, float, int, string
     #returns index of input that caused error. 0 o/w
     try:
@@ -74,14 +83,20 @@ def typeChecker (latitude, longitude, zoom, style):
     except:
         return 4
 
+    if verbose:
+        print("Types are Valid\n")
+
     return 0        
 
 #function to convert latitude/longitude & zoom to x, y coords
 #eg.    dict('x' : VALUE, 'y' : VALUE, 'zoom' : VALUE)
 #provided by TomTom and converted to Python
-def convertLatLonZ (latitude, longitude, zoom, style):
+def convertLatLonZ (latitude, longitude, zoom, style, verbose):
+    if verbose:
+        print("Calculating Map Position...\n")
+    
     #basic type checking
-    res = typeChecker(latitude, longitude, zoom, style)
+    res = typeChecker(latitude, longitude, zoom, style, verbose)
     if (res == 0):
         #typing OK
         latitude = float(latitude)
@@ -89,9 +104,12 @@ def convertLatLonZ (latitude, longitude, zoom, style):
         zoom = int(zoom)
 
         #if bounds are correct then utilize formula
-        if boundChecker(latitude, longitude, zoom, style):
+        if boundChecker(latitude, longitude, zoom, style, verbose):
             x = math.floor((longitude + 180) / 360 * pow(2, zoom))
             y = math.floor((1 - math.log(math.tan(latitude * math.pi / 180) + 1 / math.cos(latitude * math.pi / 180)) / math.pi) / 2 * pow(2, zoom))
+
+            if verbose:
+                print("Map Positions Calculated.\n")
 
             #dictionary with keys for each calculated value (x, y) and zoom
             return {
@@ -126,10 +144,13 @@ def heightCalc (R, G, B):
     return height
 
 #runs all tests for various portions of the code
-def runTests ():
+def runTests (verbose):
     ################################################################################################################
     # Test 1:
     #           sample url img retrieval
+
+    if verbose:
+        print("Test 1: Obtaining Traffic Data for Sample URL\n")
 
     #extract image on sample URL
     extract_IMG(os.environ['SAMPLE_URL'])
@@ -137,6 +158,9 @@ def runTests ():
     ################################################################################################################
     # Test 2:
     #           get template URL and modify it for img retrieval.  this should match the sample URL
+
+    if verbose:
+        print("Test 2: Obtaining Traffic Data using Template URL.\nThis image should match the Sample URL\n")
 
     #get the editable url from env and use template for modification
     TRAFFIC_URL_Template = Template(os.environ['TRAFFIC_URL'])
@@ -150,6 +174,9 @@ def runTests ():
     # Test 3:
     #           get template URL and modify it for img retrieval. this location was arbitrarily selected for testing
 
+    if verbose:
+        print("Test 3: Obtaining Traffic Data using Template URL.\nThis location was arbitrarily selected for testing\n")
+
     TRAFFIC_URL = TRAFFIC_URL_Template.substitute(zoom = 12, style = "flow", x = 702, y = 1635, thickness = 10, tileSize = 512)
 
     extract_IMG(TRAFFIC_URL)
@@ -158,9 +185,12 @@ def runTests ():
     # Test 4:
     #            use lat/long conversion then insert to URL for img retrieval for Traffic Data
 
+    if verbose:
+        print("Test 4: Utilizing Latitude/Longitude Conversion alongside Template URL.\nThis should be an image of traffic in LA.\n")
+
     #now we will show an image of LA
 
-    res = convertLatLonZ("34.098907", "-118.327759", "10", "traffic")
+    res = convertLatLonZ("34.098907", "-118.327759", "10", "traffic", False)
     #print(res.keys())
 
     TRAFFIC_URL = TRAFFIC_URL_Template.substitute(zoom = res['zoom'], style = "flow", x = res['x'], y = res['y'], thickness = 10, tileSize = 512)
@@ -175,12 +205,15 @@ def runTests ():
     # Test 5:
     #            get hillshade & satellite images so we can look at 3D data on top of traffic data. we will use the same location & zoom from Test 4
 
+    if verbose:
+        print("Test 5: Obtaining HillShade image followed by Satellite image using Template URL.\nThese images are of LA.\n")
+
     TOPOGRAPHICAL_URL_Template = Template(os.environ['TOPOGRAPHICAL_URL'])
 
     # hillshade
     #ONLY PNGs for hillshade
 
-    res = convertLatLonZ("34.098907", "-118.327759", "10", "hill")
+    res = convertLatLonZ("34.098907", "-118.327759", "10", "hill", False)
     TOPOGRAPHICAL_URL = TOPOGRAPHICAL_URL_Template.substitute(zoom = res['zoom'], style = "hill", x = res['x'], y = res['y'], format = "png")
     extract_IMG(TOPOGRAPHICAL_URL)
 
@@ -190,9 +223,83 @@ def runTests ():
     # satellite
     #ONLY JPG for satellite
 
-    res = convertLatLonZ("34.098907", "-118.327759", "10", "sat")
+    res = convertLatLonZ("34.098907", "-118.327759", "10", "sat", False)
     TOPOGRAPHICAL_URL = TOPOGRAPHICAL_URL_Template.substitute(zoom = res['zoom'], style = "sat", x = res['x'], y = res['y'], format = "jpg")
     extract_IMG(TOPOGRAPHICAL_URL)
+
+    if verbose:
+        print("\n\n")
+
+    return
+
+#main program
+def main():
+    parser = argparse.ArgumentParser()
+
+    #arguments:
+    #       latitude
+    #       longitude
+    #       zoom
+    #       style
+    #       demo            - used for running tests
+    #       verbose         - prints during each stage of program
+
+    parser.add_argument('lat', type = float, help = 'Latitude. -85.051128779807 < Latitude < 85.051128779806')
+    parser.add_argument('lon', type = float, help = 'Longitude. -180 < Longitude < 180')
+    parser.add_argument('zoom', type = int, help = 'Zoom. Zoom level depends on \'style\' selected.\nTraffic: 0 < Zoom < 22\nSat(ellite): 0 < Zoom < 19\nHill(shade): 0 < Zoom < 13')
+    parser.add_argument('style', choices = ["traffic", "sat", "hill"], type = str, help = 'Style of Image to obtain. Any of: \'traffic\', \'sat\', \'hill\'')
+    parser.add_argument('--demo', action = 'store_true', help = 'If True, runs 5 Tests before using the given values for the program')
+    parser.add_argument('--verbose', action = 'store_true', help = 'If True, explicitly states what the program is doing at each step')
+
+    #parse arguments given
+    args = parser.parse_args()
+
+    #loads the env file ".env"
+    load_dotenv()
+
+    #run Tests
+    if args.demo:
+        if args.verbose:
+            print("Running Tests...\n\n")
+        runTests(args.verbose)
+
+    #convert to x,y,z from lat,lon,z
+    res = convertLatLonZ(args.lat, args.lon, args.zoom, args.style, args.verbose)
+
+    #start getting image from TOMTOM
+    if args.style == "traffic":
+        #get TemplateURL
+        TRAFFIC_URL_Template = Template(os.environ['TRAFFIC_URL'])
+
+        #substitute
+        TRAFFIC_URL = TRAFFIC_URL_Template.substitute(zoom = res['zoom'], style = "flow", x = res['x'], y = res['y'], thickness = 10, tileSize = 512)
+
+        if args.verbose:
+            print("Obtaining Image From TomTom...")
+
+        #extract image
+        extract_IMG(TRAFFIC_URL)
+
+    else:
+        #get TemplateURL
+        TOPOGRAPHICAL_URL_Template = Template(os.environ['TOPOGRAPHICAL_URL'])
+
+        #determine img format
+        if args.style == "hill":
+            imgFormat = 'png'
+        else:
+            imgFormat = 'jpg'
+
+        #substitute
+        TOPOGRAPHICAL_URL = TOPOGRAPHICAL_URL_Template.substitute(zoom = res['zoom'], style = args.style, x = res['x'], y = res['y'], format = imgFormat)
+
+        #extract image
+        extract_IMG(TOPOGRAPHICAL_URL)
+
+    if args.verbose:
+        print("Image Obtained!")
+
+    return
 
 ################################################################################################################
 #                       Notes
@@ -210,18 +317,20 @@ def runTests ():
 
 #zoom 14 is the maximum zoom available for all views
 
+                            #####################################################
+
+#we access the env vars with os.environ['VAR_NAME']
+
+#print(os.environ['TOMTOMKEY'])
+#print(os.environ['SAMPLE_URL'])
+#print(os.environ['TRAFFIC_URL'])
+#print(os.environ['TOPOGRAPHICAL_URL'])
+
 ################################################################################################################
 
-'''
-we access the env vars with os.environ['VAR_NAME']
-
-print(os.environ['TOMTOMKEY'])
-print(os.environ['SAMPLE_URL'])
-print(os.environ['TRAFFIC_URL'])
-print(os.environ['TOPOGRAPHICAL_URL'])
-'''
-
-#loads the env file ".env"
-load_dotenv()
-
-runTests()
+#runner of the program
+if __name__ == '__main__':
+    try:
+        main()
+    except Exception as e:
+        raise e
