@@ -50,3 +50,17 @@ See the folder structure below:
 │
 └── Readme.md
 ```
+
+# Using API
+
+Assuming the user is in the TrafficModeling directory:
+
+From the cmd line, type: 
+
+```./API/python LATITUDE LONGITUDE ZOOM STYLE --demo --verbose```
+
+There are 2 optional flags:
+
+1) demo: Which runs through a series of tests to showcase the program's capabilities
+
+2) verbose: Explicitly states the step by step process of what the program is doing as it is doing it.
