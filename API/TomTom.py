@@ -115,6 +115,15 @@ def convertLatLonZ (latitude, longitude, zoom, style):
         else:
             raise ValueError("UNEXPECTED ERROR -- CHECK CODE")
 
+#calculates the height of a pixel given RGB
+#height will be be in the following units: meters above sea level
+def heightCalc (R, G, B):
+    #formula from TOMTOM
+    #See: https://developer.tomtom.com/map-display-api/documentation/raster/hillshade-tile
+    height = -10000 + ((R * 256 * 256 + G * 256 + B) * 0.1)
+    
+    return height
+
 ################################################################################################################
 #                       Notes
         
@@ -202,6 +211,9 @@ TOPOGRAPHICAL_URL_Template = Template(os.environ['TOPOGRAPHICAL_URL'])
 res = convertLatLonZ("34.098907", "-118.327759", "10", "hill")
 TOPOGRAPHICAL_URL = TOPOGRAPHICAL_URL_Template.substitute(zoom = res['zoom'], style = "hill", x = res['x'], y = res['y'], format = "png")
 extract_IMG(TOPOGRAPHICAL_URL)
+
+#calculate height from single pixel for this image we obtained
+#...
 
 # satellite
 #ONLY JPG for satellite
