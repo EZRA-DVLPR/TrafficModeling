@@ -12,6 +12,7 @@ def extract_IMG (html):
     #if OK then get img
     if res.status_code == 200:
         image = Image.open(BytesIO(res.content))
+        image = image.convert("RGB")
         image.show()
     else:
         print(res.status_code)
@@ -124,6 +125,75 @@ def heightCalc (R, G, B):
     
     return height
 
+#runs all tests for various portions of the code
+def runTests ():
+    ################################################################################################################
+    # Test 1:
+    #           sample url img retrieval
+
+    #extract image on sample URL
+    extract_IMG(os.environ['SAMPLE_URL'])
+
+    ################################################################################################################
+    # Test 2:
+    #           get template URL and modify it for img retrieval.  this should match the sample URL
+
+    #get the editable url from env and use template for modification
+    TRAFFIC_URL_Template = Template(os.environ['TRAFFIC_URL'])
+
+    #modify template (we are matching the sampleURL manually)
+    TRAFFIC_URL = TRAFFIC_URL_Template.substitute(zoom = 12, style = "flow", x = 2044, y = 1360, thickness = 10, tileSize = 512)
+
+    extract_IMG(TRAFFIC_URL)
+
+    ################################################################################################################
+    # Test 3:
+    #           get template URL and modify it for img retrieval. this location was arbitrarily selected for testing
+
+    TRAFFIC_URL = TRAFFIC_URL_Template.substitute(zoom = 12, style = "flow", x = 702, y = 1635, thickness = 10, tileSize = 512)
+
+    extract_IMG(TRAFFIC_URL)
+
+    ################################################################################################################
+    # Test 4:
+    #            use lat/long conversion then insert to URL for img retrieval for Traffic Data
+
+    #now we will show an image of LA
+
+    res = convertLatLonZ("34.098907", "-118.327759", "10", "traffic")
+    #print(res.keys())
+
+    TRAFFIC_URL = TRAFFIC_URL_Template.substitute(zoom = res['zoom'], style = "flow", x = res['x'], y = res['y'], thickness = 10, tileSize = 512)
+    #print(TRAFFIC_URL)
+
+    extract_IMG(TRAFFIC_URL)
+
+    #See here for google maps vision of this map:
+    #https://www.google.com/maps/d/u/0/viewer?mid=1JrNQOeGSrrvpQrYhLYgJfeCt7so&hl=en&ll=34.060222254822%2C-118.35919115297678&z=11
+
+    ###############################################################################################################
+    # Test 5:
+    #            get hillshade & satellite images so we can look at 3D data on top of traffic data. we will use the same location & zoom from Test 4
+
+    TOPOGRAPHICAL_URL_Template = Template(os.environ['TOPOGRAPHICAL_URL'])
+
+    # hillshade
+    #ONLY PNGs for hillshade
+
+    res = convertLatLonZ("34.098907", "-118.327759", "10", "hill")
+    TOPOGRAPHICAL_URL = TOPOGRAPHICAL_URL_Template.substitute(zoom = res['zoom'], style = "hill", x = res['x'], y = res['y'], format = "png")
+    extract_IMG(TOPOGRAPHICAL_URL)
+
+    #calculate height from single pixel for this image we obtained
+    #...
+
+    # satellite
+    #ONLY JPG for satellite
+
+    res = convertLatLonZ("34.098907", "-118.327759", "10", "sat")
+    TOPOGRAPHICAL_URL = TOPOGRAPHICAL_URL_Template.substitute(zoom = res['zoom'], style = "sat", x = res['x'], y = res['y'], format = "jpg")
+    extract_IMG(TOPOGRAPHICAL_URL)
+
 ################################################################################################################
 #                       Notes
         
@@ -142,9 +212,6 @@ def heightCalc (R, G, B):
 
 ################################################################################################################
 
-#loads the env file ".env"
-load_dotenv()
-
 '''
 we access the env vars with os.environ['VAR_NAME']
 
@@ -154,70 +221,7 @@ print(os.environ['TRAFFIC_URL'])
 print(os.environ['TOPOGRAPHICAL_URL'])
 '''
 
-################################################################################################################
-# Test 1:
-#           sample url img retrieval
+#loads the env file ".env"
+load_dotenv()
 
-#extract image on sample URL
-extract_IMG(os.environ['SAMPLE_URL'])
-
-################################################################################################################
-# Test 2:
-#           get template URL and modify it for img retrieval.  this should match the sample URL
-
-#get the editable url from env and use template for modification
-TRAFFIC_URL_Template = Template(os.environ['TRAFFIC_URL'])
-
-#modify template (we are matching the sampleURL manually)
-TRAFFIC_URL = TRAFFIC_URL_Template.substitute(zoom = 12, style = "flow", x = 2044, y = 1360, thickness = 10, tileSize = 512)
-
-extract_IMG(TRAFFIC_URL)
-
-################################################################################################################
-# Test 3:
-#           get template URL and modify it for img retrieval. this location was arbitrarily selected for testing
-
-TRAFFIC_URL = TRAFFIC_URL_Template.substitute(zoom = 12, style = "flow", x = 702, y = 1635, thickness = 10, tileSize = 512)
-print(TRAFFIC_URL)
-
-extract_IMG(TRAFFIC_URL)
-
-################################################################################################################
-# Test 4:
-#            use lat/long conversion then insert to URL for img retrieval for Traffic Data
-
-#now we will show an image of LA
-
-res = convertLatLonZ("34.098907", "-118.327759", "10", "traffic")
-#print(res.keys())
-
-TRAFFIC_URL = TRAFFIC_URL_Template.substitute(zoom = res['zoom'], style = "flow", x = res['x'], y = res['y'], thickness = 10, tileSize = 512)
-#print(TRAFFIC_URL)
-
-extract_IMG(TRAFFIC_URL)
-
-#See here for google maps vision of this map:
-#https://www.google.com/maps/d/u/0/viewer?mid=1JrNQOeGSrrvpQrYhLYgJfeCt7so&hl=en&ll=34.060222254822%2C-118.35919115297678&z=11
-
-###############################################################################################################
-# Test 5:
-#            get hillshade & satellite images so we can look at 3D data on top of traffic data. we will use the same location & zoom from Test 4
-
-TOPOGRAPHICAL_URL_Template = Template(os.environ['TOPOGRAPHICAL_URL'])
-
-# hillshade
-#ONLY PNGs for hillshade
-
-res = convertLatLonZ("34.098907", "-118.327759", "10", "hill")
-TOPOGRAPHICAL_URL = TOPOGRAPHICAL_URL_Template.substitute(zoom = res['zoom'], style = "hill", x = res['x'], y = res['y'], format = "png")
-extract_IMG(TOPOGRAPHICAL_URL)
-
-#calculate height from single pixel for this image we obtained
-#...
-
-# satellite
-#ONLY JPG for satellite
-
-res = convertLatLonZ("34.098907", "-118.327759", "10", "sat")
-TOPOGRAPHICAL_URL = TOPOGRAPHICAL_URL_Template.substitute(zoom = res['zoom'], style = "sat", x = res['x'], y = res['y'], format = "jpg")
-extract_IMG(TOPOGRAPHICAL_URL)
+runTests()
