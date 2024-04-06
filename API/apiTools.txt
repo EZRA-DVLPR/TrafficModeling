@@ -1,11 +1,14 @@
-grouping for traffic flow
-https://developer.tomtom.com/traffic-api/documentation/traffic-flow/traffic-flow-service
-
-raster flow tiles - with map
+Traffic flow
 https://developer.tomtom.com/traffic-api/documentation/traffic-flow/raster-flow-tiles
 
-#explanation for zoom levels and tile grid
+Hillshade
+https://developer.tomtom.com/map-display-api/documentation/raster/hillshade-tile
+
+Satellite
+https://developer.tomtom.com/map-display-api/documentation/raster/satellite-tile
+
+Explanation for zoom levels and tile grid
 https://developer.tomtom.com/map-display-api/documentation/zoom-levels-and-tile-grid
 
-#dev tools tomtom
+Dev tools tomtom
 https://developer.tomtom.com/
