@@ -73,3 +73,6 @@ crashlytics-build.properties
 
 #env vars for API
 /API/.env
+
+#file created when looking on MAC
+.DS_Store
