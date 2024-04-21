@@ -57,7 +57,7 @@ Assuming the user is in the TrafficModeling directory:
 
 From the cmd line, type: 
 
-```./API/python LATITUDE LONGITUDE ZOOM STYLE --demo --verbose```
+```./API/TomTom.py LATITUDE LONGITUDE ZOOM STYLE --demo --verbose```
 
 There are 2 optional flags:
 
