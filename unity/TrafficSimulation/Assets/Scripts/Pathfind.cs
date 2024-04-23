@@ -10,11 +10,12 @@ public class playerwalk : MonoBehaviour
 
     void Start()
     {
+        int y = -1;
         agent = GetComponent<NavMeshAgent>();
     }
 
     void Update()
     {
-        agent.destination = goal.position;
+        agent.destination = goal.position; 
     }
 }
