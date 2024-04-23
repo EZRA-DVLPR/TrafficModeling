@@ -32,3 +32,7 @@ Starting to think about the UI/UX of the program a little more and changed the c
 \begin{flushleft}
 With that, we started testing Unity's built in pathfinding function and seeing what limitations it has. A limitation we found was that between two roads, the pathfinding would have a preference for the road that it was closest to. If it was already on the road, it would continue further down. The issue here is that if there is an obstacle at the end of the road, then the object would continue down the path then be stuck when it ran into it. We would need to have a system that it could "see down the road" and choose to go the other way or it would continue down a road then turn around when it runs into an obstacle.
 \end{flushleft}
+
+\begin{flushleft}
+As for the road network from the image processing may be more difficult than expect. As for now, we are currently just using a hand made road network. If it proves to be more challenging than the time allows, then we will switch gears and create hand-made road layouts and then primarily focus upon the pathfinding AI.
+\end{flushleft}
