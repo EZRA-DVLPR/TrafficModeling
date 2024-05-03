@@ -56,10 +56,12 @@ Assuming the user is in the TrafficModeling directory:
 
 From the cmd line, type: 
 
-```./API/TomTom.py LATITUDE LONGITUDE ZOOM STYLE --demo --verbose```
+```./API/TomTom.py LATITUDE LONGITUDE ZOOM STYLE --save --demo --verbose```
 
 There are 2 optional flags:
 
-1) demo: Which runs through a series of tests to showcase the program's capabilities
+1) save: saves the images generated to the local machine in the folder ```./API/Images```
 
-2) verbose: Explicitly states the step by step process of what the program is doing as it is doing it.
+2) demo: Which runs through a series of tests to showcase the program's capabilities
+
+3) verbose: Explicitly states the step by step process of what the program is doing as it is doing it
