@@ -14,6 +14,17 @@ def extract_IMG (html):
         image = Image.open(BytesIO(res.content))
         image = image.convert("RGB")
         image.show()
+
+        #make filepath via html link after converting all `/` to `_`
+        html = html.replace("/", "_")
+        fp = f"./API/Images/{html[html.find('map') + 4 : html.find('?')]}"
+
+        #if filepath DNE then create it
+        if not os.path.exists(os.path.dirname(fp)):
+            os.makedirs(os.path.dirname(fp))
+        
+        image.save(fp)
+        
     else:
         raise ValueError(f"Improper connection to TomTom. See code: {res.status_code}")
 
