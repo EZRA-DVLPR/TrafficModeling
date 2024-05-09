@@ -285,7 +285,7 @@ def main():
         TRAFFIC_URL_Template = Template(os.environ['TRAFFIC_URL'])
 
         #substitute
-        TRAFFIC_URL = TRAFFIC_URL_Template.substitute(zoom = res['zoom'], style = "flow", x = res['x'], y = res['y'], thickness = 10, tileSize = 512)
+        TRAFFIC_URL = TRAFFIC_URL_Template.substitute(zoom = res['zoom'], style = "flow", x = res['x'], y = res['y'], thickness = 5, tileSize = 512)
 
         if args.verbose:
             print("Obtaining Image From TomTom...")
