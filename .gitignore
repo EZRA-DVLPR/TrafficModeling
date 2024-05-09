@@ -76,3 +76,9 @@ crashlytics-build.properties
 
 #file created when looking on MAC
 .DS_Store
+
+#extraneous auxiliary files created from latex for the final paper
+/FinalPaper/LaTeXFinalPaperFiles/*.aux
+/FinalPaper/LaTeXFinalPaperFiles/*.log
+/FinalPaper/LaTeXFinalPaperFiles/*.synctex.gz
+/FinalPaper/LaTeXFinalPaperFiles/*.toc

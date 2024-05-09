@@ -6,31 +6,53 @@
 \usepackage[table]{xcolor}
 %used to not have a new page when including another .tex file
 \usepackage{newclude}
-%used to indent the first line in each section
-\usepackage{indentfirst}
 
 %
 \begin{document}
 %
-    \title{Traffic Modeling with Unity 3D}
+    \title{3D Traffic Modeling in Unity}
 
-    \author{Isaiah Martinez \\ CSUN \\ Mathematics Department \\ isaiah.martinez.891@my.csun.edu}
+    \author{
+
+    Group 2:\\\\
+    
+    \textbf{Isaiah Martinez} \\ CSUN \\ Computer Science Department \\ isaiah.martinez.891@my.csun.edu
+    \\
+    \and
+    \\
+    \textbf{Jae Molina} \\ CSUN \\ Computer Science Department \\ jae.molina.499@my.csun.edu
+    \\
+    \and
+    \\
+    \textbf{Anastasia Naydina} \\ CSUN \\ Computer Science Department \\ anastasia.naydina.947@my.csun.edu
+    \\\\\\
+    }
           
-    \date{02/3/2021}
+    \date{05/13/2024}
 
     \maketitle
+    
+    \newpage
    
     \tableofcontents
  
     \newpage
-
-    \section{Introduction}
-
-    \section{Methods}
+    
+    \include*{ChangeHist}
 
     \newpage
-    \section{Tables and figures}
 
+    \include*{Intro}
+
+    \include*{DesGoal}
+
+    \include*{SysBehav}
+
+    \include*{LogView}
+
+    \include*{SceneView}
+
+    \newpage
     \begin{thebibliography}{}
 
     \bibitem{baker} Baker, N. 1966,
@@ -41,28 +63,6 @@
     \bibitem{balluch} Balluch, M. 1988,
         A\&A, 200, 58
 
-    \bibitem{cox} Cox, J. P. 1980,
-        Theory of Stellar Pulsation
-        (Princeton University Press, Princeton) 165
-
-    \bibitem{cox69} Cox, A. N.,\& Stewart, J. N. 1969,
-        Academia Nauk, Scientific Information 15, 1
-
-    \bibitem{mizuno} Mizuno H. 1980,
-        Prog. Theor. Phys., 64, 544
-    
-    \bibitem{tscharnuter} Tscharnuter W. M. 1987,
-        A\&A, 188, 55
-    
-    \bibitem{terlevich} Terlevich, R. 1992, in ASP Conf. Ser. 31, 
-        Relationships between Active Galactic Nuclei and Starburst Galaxies, 
-        ed. A. V. Filippenko, 13
-
-    \bibitem{yorke80a} Yorke, H. W. 1980a,
-        A\&A, 86, 286
-
-    \bibitem{zheng} Zheng, W., Davidsen, A. F., Tytler, D. \& Kriss, G. A.
-        1997, preprint
     \end{thebibliography}
 
 \end{document}
