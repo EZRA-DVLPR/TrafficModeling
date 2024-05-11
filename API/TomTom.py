@@ -5,7 +5,7 @@ from string import Template         #Template is used for editing the editable U
 from dotenv import load_dotenv      #loads env file
 
 #extracts img from given html
-def extract_IMG (html, save):
+def extractIMG (html, save):
     #make request
     res = requests.get(html)
     
@@ -165,7 +165,7 @@ def runTests (save, verbose):
         print("Test 1: Obtaining Traffic Data for Sample URL\n")
 
     #extract image on sample URL
-    extract_IMG(os.environ['SAMPLE_URL'], save)
+    extractIMG(os.environ['SAMPLE_URL'], save)
 
     ################################################################################################################
     # Test 2:
@@ -180,7 +180,7 @@ def runTests (save, verbose):
     #modify template (we are matching the sampleURL manually)
     TRAFFIC_URL = TRAFFIC_URL_Template.substitute(zoom = 12, style = "flow", x = 2044, y = 1360, thickness = 10, tileSize = 512)
 
-    extract_IMG(TRAFFIC_URL, save)
+    extractIMG(TRAFFIC_URL, save)
 
     ################################################################################################################
     # Test 3:
@@ -191,7 +191,7 @@ def runTests (save, verbose):
 
     TRAFFIC_URL = TRAFFIC_URL_Template.substitute(zoom = 12, style = "flow", x = 702, y = 1635, thickness = 10, tileSize = 512)
 
-    extract_IMG(TRAFFIC_URL, save)
+    extractIMG(TRAFFIC_URL, save)
 
     ################################################################################################################
     # Test 4:
@@ -208,7 +208,7 @@ def runTests (save, verbose):
     TRAFFIC_URL = TRAFFIC_URL_Template.substitute(zoom = res['zoom'], style = "flow", x = res['x'], y = res['y'], thickness = 10, tileSize = 512)
     #print(TRAFFIC_URL)
 
-    extract_IMG(TRAFFIC_URL, save)
+    extractIMG(TRAFFIC_URL, save)
 
     #See here for google maps vision of this map:
     #https://www.google.com/maps/d/u/0/viewer?mid=1JrNQOeGSrrvpQrYhLYgJfeCt7so&hl=en&ll=34.060222254822%2C-118.35919115297678&z=11
@@ -227,7 +227,7 @@ def runTests (save, verbose):
 
     res = convertLatLonZ("34.098907", "-118.327759", "10", "hill", False)
     TOPOGRAPHICAL_URL = TOPOGRAPHICAL_URL_Template.substitute(zoom = res['zoom'], style = "hill", x = res['x'], y = res['y'], format = "png")
-    extract_IMG(TOPOGRAPHICAL_URL, save)
+    extractIMG(TOPOGRAPHICAL_URL, save)
 
     #calculate height from single pixel for this image we obtained
     #...
@@ -237,7 +237,7 @@ def runTests (save, verbose):
 
     res = convertLatLonZ("34.098907", "-118.327759", "10", "sat", False)
     TOPOGRAPHICAL_URL = TOPOGRAPHICAL_URL_Template.substitute(zoom = res['zoom'], style = "sat", x = res['x'], y = res['y'], format = "jpg")
-    extract_IMG(TOPOGRAPHICAL_URL, save)
+    extractIMG(TOPOGRAPHICAL_URL, save)
 
     if verbose:
         print("\n\n")
@@ -291,7 +291,7 @@ def main():
             print("Obtaining Image From TomTom...")
 
         #extract image
-        extract_IMG(TRAFFIC_URL, args.save)
+        extractIMG(TRAFFIC_URL, args.save)
 
     else:
         #get TemplateURL
@@ -307,7 +307,7 @@ def main():
         TOPOGRAPHICAL_URL = TOPOGRAPHICAL_URL_Template.substitute(zoom = res['zoom'], style = args.style, x = res['x'], y = res['y'], format = imgFormat)
 
         #extract image
-        extract_IMG(TOPOGRAPHICAL_URL, args.save)
+        extractIMG(TOPOGRAPHICAL_URL, args.save)
 
     if args.verbose:
         print("Image Obtained!")
