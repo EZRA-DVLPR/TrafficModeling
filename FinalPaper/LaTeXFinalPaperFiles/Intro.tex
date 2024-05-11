@@ -1,30 +1,54 @@
 \section{Introduction}
 
 This document describes the work put in to create a program that runs in Unity to model traffic in 3D.
-It allows for users to determine a start position, as well as a desired ending position which will follow traffic rules to ensure a legal and fast guide.
+It allows for users to determine a start position, as well as a desired ending position which will follow traffic rules to ensure a fast and legal guide.
+
+The code is able to be viewed on Github at this \href{https://github.com/EZRA-DVLPR/TrafficModeling}{Link}.
 
 \subsection{Background}
 
-Traffic congestion is a very common experience for those in Los Angeles \cite{CNN}.
+Traffic congestion is a very common experience for those who live in Los Angeles \cite{CNN}.
 In order to address this problem many apps such as Waze and Google Maps were created \cite{TraffApps}.
 Following in the style of these applications, we wanted to create software that follows a similar purpose: to provide a good model for traffic flow and path to a destination with this information.
 
 \subsection{Related Works}
 
-
+We were interested in trying to model a similar outcome as outlined in this paper \cite{TrafficPaper}.
+In order to achieve this, we would utilize Unity, a 3rd party package called EasyRoads \cite{EasyRoads}, MLAgents \cite{MLAgents}, and an external source for the traffic data.
+To obtain the traffic data, we would utilize real-time traffic information from TomTom \cite{TomTom}.
+We initially were hoping to utilize ML Learning Agents to do something similar to what was done in this Youtube video \cite{AITrackmania}.
+In the end we were decided against implementing ML Learning Agents for our project, as we would utilize Unity's built-in pathfinding capabilities.
 
 \subsection{Stakeholders}
 
-Stakeholders are: 
+The Major Stakeholders are: 
 \begin{enumerate}
-    \item stakeholder 1
-    \item stakeholder 2
+    \item Users: they want a product that will work by giving accurate and detailed information of traffic.
+    Additionally, they want the data to be useful for determining the route to take from their source destination to the desired ending destination.
+    
+    \item Developers: they want to have a simplistic model for creating, modifying, and debugging the project across its various languages, scripts, and so forth.
+    Development would be made easy by utilizing professional tools, technologies, and features.
 \end{enumerate}
 
 \subsection{Document Structure}
 
-What does each section of the document cover?
-What style of explanation will be used?
+This document contains a series of 3 main sections:
+\begin{enumerate}
+    \item Design Goals: This section outlines the main objectives and guiding principles that drive the design of the software project. 
+    It provides a high-level vision of what the software aims to achieve in terms of functionality, usability, performance, and other key aspects.
+    
+    \item System Behavior: This section describes how the system behaves as a whole and its overall functionality. 
+    It should give readers a clear understanding of the system's expected actions and reactions in different scenarios.
+    
+    \item Logical View: The logical view provides a conceptual model of the software's architecture and its components. 
+    This includes how the software is organized and how its different parts work together.
+
+    \item Scenario View: The scenario view illustrates how the system behaves in specific use cases or scenarios. 
+    It helps to show how the system meets the requirements in practice.
+\end{enumerate}
+
+We will explain the project utilizing UML diagrams, User-Interaction Diagrams, Class Diagrams, and other commonly used professional Software Development Models.
+This is to ensure that out project is explained with the utmost clarity, and conciseness.
 
 \subsection{Responsibilities}
 
