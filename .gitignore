@@ -82,3 +82,4 @@ crashlytics-build.properties
 /FinalPaper/LaTeXFinalPaperFiles/*.log
 /FinalPaper/LaTeXFinalPaperFiles/*.synctex.gz
 /FinalPaper/LaTeXFinalPaperFiles/*.toc
+/FinalPaper/LaTeXFinalPaperFiles/*.out
