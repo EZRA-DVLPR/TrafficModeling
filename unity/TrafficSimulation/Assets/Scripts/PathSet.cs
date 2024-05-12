@@ -40,11 +40,6 @@ public class PathSet : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         //Debug.Log($"Check");

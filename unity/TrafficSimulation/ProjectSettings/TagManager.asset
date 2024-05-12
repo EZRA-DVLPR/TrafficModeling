@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Camera
+  - end
+  - top
   layers:
   - Default
   - TransparentFX

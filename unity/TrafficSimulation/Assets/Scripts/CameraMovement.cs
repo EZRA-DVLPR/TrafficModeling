@@ -8,10 +8,9 @@ public class CameraMovement : MonoBehaviour
     public GameObject player;
     private Vector3 offset;
 
-
     void Start()
     {
-        offset = new Vector3(0, 50, 0); //sets how far camera is
+        offset = new Vector3(0, 200, 0); //sets how far camera is
     }
 
     // Update is called once per frame
