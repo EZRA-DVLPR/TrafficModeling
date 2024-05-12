@@ -12,12 +12,6 @@ public class PathFind : MonoBehaviour
     public GameObject end;
     public GameObject arrived;
 
-    void Start()
-    {
-       // Sedan.SetActive(false);
-        agent = GetComponent<NavMeshAgent>();
-    }
-
     void Update()
     {
         agent.destination = goal.position; 
@@ -36,7 +30,9 @@ public class PathFind : MonoBehaviour
         Sedan.SetActive(true);
         Sedan.transform.position = start.transform.position;
         agent = GetComponent<NavMeshAgent>();
+
         Update();
+
         Debug.Log($"sedan now active");
     }
 
