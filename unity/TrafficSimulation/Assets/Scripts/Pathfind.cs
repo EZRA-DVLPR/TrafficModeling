@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class playerwalk : MonoBehaviour
+public class PathFind : MonoBehaviour
 {
     public Transform goal;
     public NavMeshAgent agent;
-    public GameObject Menu;
     public GameObject Sedan;
+    public GameObject start;
+    public GameObject end;
+    public GameObject arrived;
 
     void Start()
     {
-        Sedan.SetActive(false);
+       // Sedan.SetActive(false);
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -21,13 +23,25 @@ public class playerwalk : MonoBehaviour
         agent.destination = goal.position; 
     }
 
-    private void UIManager_onRestartGame()
+    public void OnTriggerEnter(Collider collision)
+    {
+        if (collision.tag == "end")
+        {
+            arrived.SetActive(true);
+            Debug.Log($"Arrived");
+        }
+    }
+    private void PathSet_onRestartGame()
     {
         Sedan.SetActive(true);
+        Sedan.transform.position = start.transform.position;
+        agent = GetComponent<NavMeshAgent>();
+        Update();
+        Debug.Log($"sedan now active");
     }
 
     private void OnEnable()
     {
-        UIManager.onRestartGame += UIManager_onRestartGame;
+        PathSet.onRestartGame += PathSet_onRestartGame;
     }
 }
