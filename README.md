@@ -28,12 +28,15 @@ See the folder structure below:
 ```
 .
 ├── API
+│   ├── Images
+│   └── TomTom.py
 │
 ├── BlenderModels
 │
 ├── FinalPaper
-│   ├── LaTeXFinalPaperFiles
 │   │   └── Images
+│   ├── LaTeXFinalPaperFiles
+│   ├── finalPaper.pdf
 │   └── Sample
 │       └── Images
 │
@@ -41,11 +44,14 @@ See the folder structure below:
 │   ├── Images
 │   ├── Update1
 │   ├── Update2
-│   └── Update3
+│   ├── Update3
+│   └── Update4
 │
 ├── RelatedWorks
 │
 ├── unity
+│   ├── MLAgents
+│   └── TrafficSimulation
 │
 └── Readme.md
 ```
