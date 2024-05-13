@@ -11,40 +11,33 @@ public class SpawningCars : MonoBehaviour
     public GameObject roadL;
     public Transform pos;
 
-    private void PathSet_onRestartGame()
+    private void Start()
     {
-        car.SetActive(true);
 
         GameObject go = roadT;
-        //Debug.Log(go.name + " has " + go.transform.childCount + " children");
         GameObject go2 = roadL;
-        //Debug.Log(go2.name + " has " + go2.transform.childCount + " children");
 
         int x = Random.Range(0, 277);
-        int y = Random.Range(0, 517);
 
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 50; i++)
          {
+            randomCar();
+            car.SetActive(true);
+
             //get random position on gameobject road 
             pos = go.transform.GetChild(x);
             var newCar = Instantiate(car);
 
             newCar.transform.position = pos.transform.position + new Vector3(0, 2, 0);
-            Debug.Log($"Made car at: " + pos);
             x = Random.Range(0, 277);
-
-            
         }
     }
 
-    public void Update()
+    public void randomCar()
     {
-        //if car made it to destination
-            //make new destination
+        GameObject[] cars = GameObject.FindGameObjectsWithTag("car");
+        int carx = Random.Range(0, 4);
+        car = cars[carx];
     }
 
-    private void OnEnable()
-    {
-        PathSet.onRestartGame += PathSet_onRestartGame;
-    }
 }

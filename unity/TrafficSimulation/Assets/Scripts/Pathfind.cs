@@ -8,13 +8,23 @@ public class PathFind : MonoBehaviour
     public Transform goal;
     public NavMeshAgent agent;
     public GameObject Sedan;
-    public GameObject start;
+    public Transform start;
     public GameObject end;
     public GameObject arrived;
+    private PathSet startcar;
 
     void Update()
     {
         agent.destination = goal.position; 
+        if (Sedan.transform.position == goal.position) {
+            arrived.SetActive(true);
+            Debug.Log($"Arrived");
+        }
+    }
+
+    private void Start()
+    {
+        Sedan.SetActive(false);
     }
 
     public void OnTriggerEnter(Collider collision)
@@ -28,6 +38,12 @@ public class PathFind : MonoBehaviour
     private void PathSet_onRestartGame()
     {
         Sedan.SetActive(true);
+
+        //get car position from pathset
+        startcar = start.GetComponent<PathSet>();
+        //start.transform.position = startcar.carstart.position;
+        Debug.Log($"start.transform.position" + start.transform.position);
+
         Sedan.transform.position = start.transform.position;
         agent = GetComponent<NavMeshAgent>();
 
@@ -38,6 +54,6 @@ public class PathFind : MonoBehaviour
 
     private void OnEnable()
     {
-        PathSet.onRestartGame += PathSet_onRestartGame;
+        PathSet.OnStartGame += PathSet_onRestartGame;
     }
 }

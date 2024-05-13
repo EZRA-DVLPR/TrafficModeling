@@ -9,39 +9,36 @@ public class SpawnPF : MonoBehaviour
     public GameObject road; //the road that the car will go towards
     public NavMeshAgent agent;
     public GameObject car;
-    public GameObject start;
-    public GameObject end;
-   // public GameObject arrived;
+    public Transform start;
+    public Transform end;
 
     void Update()
     {
         agent.destination = goal.position;
-        if (car.transform.position == goal.transform.position)
+        if (car.transform.position == goal.position)
         {
             SetGoal();
         }
     }
-    private void PathSet_onRestartGame()
+    private void Start()
     {
         SetGoal();
+        start = car.transform;
 
         car.SetActive(true);
         car.transform.position = start.transform.position;
         agent = GetComponent<NavMeshAgent>();
-        Update();
-        Debug.Log($"spawned car now active");
     }
 
     private void SetGoal()
     {
         //set goal transform
-        int x = Random.Range(0, 517); //randomizes the street
+        int x = Random.Range(0, 216); //randomizes the street
         GameObject go = road; //sets go of road
         goal = go.transform.GetChild(x); //get random child road
+        end.transform.position = goal.position;
+
+
     }
 
-    private void OnEnable()
-    {
-        PathSet.onRestartGame += PathSet_onRestartGame;
-    }
 }

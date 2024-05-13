@@ -10,7 +10,7 @@ public class CameraMovement : MonoBehaviour
 
     void Start()
     {
-        offset = new Vector3(0, 200, 0); //sets how far camera is
+        offset = new Vector3(0, 30, 0); //sets how far camera is
     }
 
     // Update is called once per frame

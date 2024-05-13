@@ -5,13 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class PathSet : MonoBehaviour
 {
-    public delegate void RestartGame();
-    public static event RestartGame onRestartGame;
+    public delegate void StartGame();
+    public static event StartGame OnStartGame;
+
     RaycastHit tmpHitHighlight;
     int flag = 0;
     public GameObject startID;
     public GameObject endID;
     public GameObject UI;
+    public Transform carstart;
 
     public void ButtonClicked(int id)
     {
@@ -31,7 +33,7 @@ public class PathSet : MonoBehaviour
                 if (startID.transform.position !=  new Vector3(-209, 36, 567) && endID.transform.position != new Vector3(-158, 36, 567))
                 {
                     Debug.Log($"Move on");
-                    onRestartGame();
+                    OnStartGame?.Invoke();
                     UI.SetActive(false);
 
                 } else { Debug.Log($"Need to set both flags.");  }
@@ -61,11 +63,12 @@ public class PathSet : MonoBehaviour
                     switch (flag)
                     {
                         case 0: //starting destination flag
-                            startID.transform.position = hitObject.transform.position + new Vector3(0, 1, 0); ;
+                            carstart = hitObject.transform;
+                            startID.transform.position = hitObject.transform.position; 
                             Debug.Log($"Start Set: " + hitObject.name);
                             break;
                         case 1: //ending destination flag
-                            endID.transform.position = hitObject.transform.position + new Vector3(0, 1, 0); ;
+                            endID.transform.position = hitObject.transform.position; ;
                             Debug.Log($"Destination Set: " + hitObject.name);
                             break;
                     }
@@ -74,5 +77,6 @@ public class PathSet : MonoBehaviour
             }
         }
     }
+
 }
 
