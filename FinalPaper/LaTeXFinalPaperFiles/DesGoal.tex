@@ -40,3 +40,14 @@ However the project did accomplish in other main areas
 \end{enumerate}
 \textbf{Comparison to Initial Vision}
 Despite falling short, the finished project represents a significant achievement in terms of simulating real-time traffic within a Unity. While compromises were made due to complexity and time constraints, the project still provides valuable insights into traffic simulation and serves as a foundation for future developments to the project.
+
+\begin{flushleft}
+Below is a sequential diagram for the design of the code and classes running inside Unity.  The main relationships are between the UI, which are the classes UIManager and PathSet, and the spawns like SpawningCars, SpawnPF, and PathFind that makes the pathfinding algorithm for the main car object. 
+\end{flushleft}
+
+\begin{figure}[htb]
+    \centering
+    \includegraphics[width=10cm]{Images/Sequential.png}
+       \caption{Sequential class diagram.}
+           \label{Fig:Game}
+\end{figure}
